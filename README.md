@@ -1,5 +1,8 @@
 # PolicyPulse - Adaptive Zero-Trust Access Engine
 
+![CI](https://github.com/Anujs-hub/PolicyPulse/actions/workflows/tests.yml/badge.svg)
+
+
 PolicyPulse is an **educational policy simulator** that evaluates simulated access requests using zero-trust
 principles and returns an explainable decision: `ALLOW`, `DENY` or `STEP_UP` (extra verification such as MFA).
 
