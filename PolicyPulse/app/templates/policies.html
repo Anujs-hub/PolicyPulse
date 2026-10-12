@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}Policies{% endblock %}
+{% block content %}
+<h1>Policies</h1>
+<p class="lede">Policies are validated data, never code. Precedence: any matching <strong>DENY</strong> beats any <strong>STEP_UP</strong>, which beats any <strong>ALLOW</strong>; lower priority numbers are evaluated first. If nothing allows the request, it is denied. Mandatory policies cannot be disabled or removed.</p>
+<div class="quick gap-b"><button class="btn" id="new-policy" type="button">New policy</button></div>
+<section class="card">
+  <div class="table-wrap"><table>
+    <thead><tr><th>Code</th><th>Name and description</th><th>Conditions (all must match)</th><th>Effect</th><th class="num">Priority</th><th>Status</th><th>Actions</th></tr></thead>
+    <tbody id="policy-body"></tbody>
+  </table></div>
+</section>
+
+<dialog id="policy-dialog" aria-labelledby="dlg-title">
+  <form id="policy-form" novalidate>
+    <h2 id="dlg-title">New policy</h2>
+    <div class="field"><label for="p-name">Name</label><input id="p-name" maxlength="80" required></div>
+    <div class="field"><label for="p-desc">Description</label><textarea id="p-desc" maxlength="500"></textarea></div>
+    <div class="row">
+      <div class="field"><label for="p-effect">Effect</label><select id="p-effect"></select></div>
+      <div class="field"><label for="p-priority">Priority (1-1000, lower runs first)</label><input id="p-priority" type="number" min="1" max="1000" value="300"></div>
+    </div>
+    <fieldset class="field" id="cond-fieldset"><legend><strong>Conditions</strong> (all must match)</legend>
+      <div id="cond-rows"></div>
+      <button class="btn secondary small" type="button" id="add-cond">Add condition</button>
+      <div class="hint" id="allow-hint">ALLOW policies must include rbac_permitted = true.</div>
+    </fieldset>
+    <div class="field"><label for="p-remed">Remediation text</label><textarea id="p-remed" maxlength="500"></textarea></div>
+    <div class="field check"><input id="p-enabled" type="checkbox" checked><label for="p-enabled">Enabled</label></div>
+    <p class="hint hidden" id="mand-note">Mandatory policy: only the description and remediation text can be edited.</p>
+    <div class="error-text" id="dlg-error" role="alert"></div>
+    <div class="quick"><button class="btn" type="submit">Save policy</button><button class="btn secondary" type="button" id="dlg-cancel">Cancel</button></div>
+  </form>
+</dialog>
+{% endblock %}
+{% block scripts %}<script src="/static/js/policies.js"></script>{% endblock %}

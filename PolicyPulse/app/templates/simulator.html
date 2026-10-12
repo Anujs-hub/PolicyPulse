@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block title %}Access simulator{% endblock %}
+{% block content %}
+<h1>Access simulator</h1>
+<p class="lede">Submit a simulated access request and see the decision, risk score, matched policies and remediation. Pick a sample scenario or set the inputs yourself.</p>
+
+<section class="card gap-b" aria-labelledby="scen-h">
+  <h2 id="scen-h">Sample scenarios</h2>
+  <div class="scen" id="scenarios"></div>
+</section>
+
+<div class="grid sim">
+  <section class="card" aria-labelledby="form-h">
+    <h2 id="form-h">Request</h2>
+    <form id="sim-form" novalidate>
+      <div class="row">
+        <div class="field"><label for="user_id">Identity (simulated)</label>
+          <input id="user_id" name="user_id" list="identities" maxlength="64" pattern="[A-Za-z0-9_.@\-]+" required>
+          <datalist id="identities"></datalist>
+          <div class="hint">Letters, digits and . _ @ - only.</div></div>
+        <div class="field"><label for="role">Role</label><select id="role" name="role"></select></div>
+        <div class="field"><label for="resource_id">Resource</label><select id="resource_id" name="resource_id"></select></div>
+        <div class="field"><label for="action">Action</label><select id="action" name="action"></select></div>
+        <div class="field"><label for="device_trust">Device trust</label><select id="device_trust" name="device_trust"></select></div>
+        <div class="field"><label for="access_context">Access context</label><select id="access_context" name="access_context"></select></div>
+        <div class="field"><label for="failed_logins">Failed logins</label>
+          <input id="failed_logins" name="failed_logins" type="number" min="0" max="100" step="1" value="0" required></div>
+        <div class="field check"><input id="mfa_verified" name="mfa_verified" type="checkbox"><label for="mfa_verified">MFA verified (simulated)</label></div>
+      </div>
+      <p class="hint" id="perm-hint"></p>
+      <button class="btn" type="submit" id="submit-btn">Evaluate request</button>
+    </form>
+  </section>
+
+  <section class="card verdict" id="result" aria-live="polite" aria-labelledby="res-h">
+    <h2 id="res-h">Decision</h2>
+    <p class="empty" id="result-empty">No request evaluated yet. Choose a scenario or submit the form.</p>
+    <div id="result-body" class="hidden"></div>
+  </section>
+</div>
+{% endblock %}
+{% block scripts %}<script src="/static/js/simulator.js"></script>{% endblock %}

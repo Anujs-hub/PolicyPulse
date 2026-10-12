@@ -1,0 +1,15 @@
+services:
+  policypulse:
+    build: .
+    image: policypulse:1.0.0
+    ports:
+      - "8000:8000"
+    environment:
+      POLICYPULSE_DATABASE_URL: sqlite:////app/data/policypulse.db
+      POLICYPULSE_CORS_ORIGINS: http://localhost:8000,http://127.0.0.1:8000
+    volumes:
+      - policypulse-data:/app/data
+    restart: unless-stopped
+
+volumes:
+  policypulse-data:

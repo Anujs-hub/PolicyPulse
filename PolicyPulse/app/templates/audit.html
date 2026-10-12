@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}Audit logs{% endblock %}
+{% block content %}
+<h1>Audit logs</h1>
+<p class="lede">Every evaluation is stored with its decision, risk score, matched rules and explanation. Filter, page through, or export the results as CSV.</p>
+<section class="card">
+  <form id="filters" class="filters" novalidate>
+    <div><label for="f-q">Search</label><input id="f-q" maxlength="100" placeholder="user, resource, event id"></div>
+    <div><label for="f-decision">Decision</label><select id="f-decision"><option value="">Any</option><option>ALLOW</option><option>DENY</option><option>STEP_UP</option></select></div>
+    <div><label for="f-user">User</label><input id="f-user" maxlength="64"></div>
+    <div><label for="f-resource">Resource</label><select id="f-resource"><option value="">Any</option></select></div>
+    <div><label for="f-min">Min risk</label><input id="f-min" type="number" min="0" max="100"></div>
+    <div><label for="f-max">Max risk</label><input id="f-max" type="number" min="0" max="100"></div>
+    <div><button class="btn" type="submit">Apply filters</button></div>
+    <div><button class="btn secondary" type="button" id="f-reset">Reset</button></div>
+    <div><a class="btn secondary" id="export-link" href="/api/audit-logs/export">Export CSV</a></div>
+  </form>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Time</th><th>Event</th><th>User</th><th>Resource</th><th>Action</th><th>Decision</th><th class="num">Risk</th><th>Rules</th><th>Details</th></tr></thead>
+    <tbody id="audit-body"></tbody>
+  </table></div>
+  <div class="pager">
+    <span class="muted" id="page-info" aria-live="polite"></span>
+    <span><button class="btn secondary small" id="prev" type="button">Previous</button> <button class="btn secondary small" id="next" type="button">Next</button></span>
+  </div>
+</section>
+{% endblock %}
+{% block scripts %}<script src="/static/js/audit.js"></script>{% endblock %}

@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}PolicyPulse{% endblock %} - PolicyPulse</title>
+  <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="topbar">
+  <strong>PolicyPulse</strong>
+  <button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="sidenav">Menu</button>
+</div>
+<div class="shell">
+  <aside class="side" id="sidenav">
+    <div class="brand">
+      <div class="brand-mark" aria-hidden="true">PP</div>
+      <div><strong>PolicyPulse</strong><small>Adaptive zero-trust engine</small></div>
+    </div>
+    <nav aria-label="Primary">
+      <ul class="nav">
+        <li><a href="/" {% if active == 'dashboard' %}aria-current="page"{% endif %}>Dashboard</a></li>
+        <li><a href="/simulator" {% if active == 'simulator' %}aria-current="page"{% endif %}>Access simulator</a></li>
+        <li><a href="/policies" {% if active == 'policies' %}aria-current="page"{% endif %}>Policies</a></li>
+        <li><a href="/audit" {% if active == 'audit' %}aria-current="page"{% endif %}>Audit logs</a></li>
+        <li><a href="/docs">API docs</a></li>
+      </ul>
+    </nav>
+    <div class="side-foot">Educational simulator. Not a production security gateway.</div>
+  </aside>
+  <main class="main" id="main">
+    <div class="banner" role="note"><strong>Simulation only.</strong> Identity, MFA and device trust are values you type in; nothing here is real authentication or device attestation.</div>
+    {% block content %}{% endblock %}
+  </main>
+</div>
+<script src="/static/js/common.js"></script>
+{% block scripts %}{% endblock %}
+</body>
+</html>

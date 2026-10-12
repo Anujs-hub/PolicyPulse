@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+<h1>Dashboard</h1>
+<p class="lede">Every simulated access request is evaluated against the policy set and recorded. Run a few scenarios in the simulator to populate these views.</p>
+
+<section class="grid kpis" aria-label="Request totals">
+  <div class="card kpi"><div class="n" id="k-total">-</div><div class="l">Total requests</div></div>
+  <div class="card kpi allow"><div class="n" id="k-allow">-</div><div class="l">Allowed</div></div>
+  <div class="card kpi deny"><div class="n" id="k-deny">-</div><div class="l">Denied</div></div>
+  <div class="card kpi step"><div class="n" id="k-step">-</div><div class="l">Step-up required</div></div>
+</section>
+
+<section class="grid two"  aria-label="Decision charts">
+  <div class="card"><h2>Decisions over the last 7 days</h2><div class="chart-box"><canvas id="chart-timeline" role="img" aria-label="Stacked bar chart of decisions per day"></canvas></div></div>
+  <div class="card"><h2>Decision mix</h2><div class="chart-box"><canvas id="chart-mix" role="img" aria-label="Doughnut chart of allow, deny and step-up decisions"></canvas></div></div>
+</section>
+
+<section class="grid two gap-b">
+  <div class="card"><h2>Risk score distribution</h2><div class="chart-box"><canvas id="chart-risk" role="img" aria-label="Bar chart of risk score buckets"></canvas></div></div>
+  <div class="card"><h2>Policy evaluation activity</h2>
+    <p class="muted tight" id="activity-note"></p>
+    <div class="table-wrap"><table><thead><tr><th>Policy</th><th>Name</th><th class="num">Matches</th></tr></thead><tbody id="activity-body"></tbody></table></div>
+  </div>
+</section>
+
+<section class="card" aria-label="Recent decisions">
+  <h2>Recent access decisions</h2>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Time</th><th>User</th><th>Resource</th><th>Action</th><th>Decision</th><th class="num">Risk</th></tr></thead>
+    <tbody id="recent-body"></tbody>
+  </table></div>
+  <div class="quick">
+    <a class="btn" href="/simulator">Open simulator</a>
+    <a class="btn secondary" href="/policies">Manage policies</a>
+    <a class="btn secondary" href="/audit">Browse audit logs</a>
+  </div>
+</section>
+{% endblock %}
+{% block scripts %}
+<script src="/static/vendor/chart.umd.js"></script>
+<script src="/static/js/dashboard.js"></script>
+{% endblock %}

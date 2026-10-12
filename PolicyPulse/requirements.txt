@@ -1,0 +1,11 @@
+# Runtime
+fastapi==0.115.6
+uvicorn[standard]==0.34.0
+SQLAlchemy==2.0.36
+pydantic==2.10.4
+pydantic-settings==2.7.0
+Jinja2==3.1.5
+
+# Testing (httpx is required by FastAPI's TestClient)
+pytest==8.3.4
+httpx==0.28.1
