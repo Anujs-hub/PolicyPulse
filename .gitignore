@@ -1,0 +1,30 @@
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Virtual environments
+.venv/
+.venv*/
+venv/
+
+# Environment variables and secrets
+.env
+.env.*
+!.env.example
+
+# Local database
+data/*.db
+*.sqlite
+*.sqlite3
+
+# IDE and OS
+.vscode/
+.DS_Store
+Thumbs.db
+# Local database files
+PolicyPulse/data/*.db
+data/*.db
+*.sqlite
+*.sqlite3
